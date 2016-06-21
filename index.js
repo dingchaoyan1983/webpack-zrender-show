@@ -6,8 +6,9 @@ const height = 400;
 
 window.onload = function() {
   let zr = zrender.init(document.getElementById("main"));
+  let originPosition = generateRandomPosition();
   let circle = new Circle({
-                  position: generateRandomPosition(),
+                  position: originPosition,
                   scale: [1, 1],
                   shape: {
                       cx: 0,
@@ -22,15 +23,18 @@ window.onload = function() {
                   }
               });
   zr.add(circle);
-  circle.animate('position', true)
-        .when(1000, {
+  circle.animate('', true)
+        .when(500, {
           position: generateRandomPosition()
         })
         .when(1000, {
           position: generateRandomPosition()
         })
-        .when(1000, {
+        .when(1500, {
           position: generateRandomPosition()
+        })
+        .when(2000, {
+          position: originPosition
         })
         .start();
 };
