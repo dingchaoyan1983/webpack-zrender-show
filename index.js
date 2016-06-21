@@ -1,12 +1,18 @@
 import zrender from 'zrender';
 import Circle from 'zrender/lib/graphic/shape/Circle';
+import LinearGradient from 'zrender/lib/graphic/LinearGradient';
 
-const width = 600;
-const height = 400;
+let width = 1000;
+let height = 600;
 
 window.onload = function() {
   let zr = zrender.init(document.getElementById("main"));
+  let  gradient = new LinearGradient();
   let originPosition = generateRandomPosition();
+
+  gradient.addColorStop(0, 'yellow');
+  gradient.addColorStop(1, 'black');
+
   let circle = new Circle({
                   position: originPosition,
                   scale: [1, 1],
@@ -19,10 +25,11 @@ window.onload = function() {
                       lineWidth: 5,
                       text:'circle',
                       textPosition:'inside',
-                      fill: 'green'
+                      fill: gradient
                   }
               });
   zr.add(circle);
+
   circle.animate('', true)
         .when(500, {
           position: generateRandomPosition()
